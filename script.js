@@ -10,11 +10,23 @@ function getDogImage(amount) {
 
 function displayResults(responseJson) {
   console.log(responseJson.message);
+  $('.results').removeClass('hidden');
+  let imageNum = responseJson.message.length;
+
+  for (let i=0; i<imageNum; i++) {
+    $('.results').append(
+    `<img src="${responseJson.message[i]}" class="results-img">`
+    )
+  }
+
 }
 
 function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
+    //clear results section
+    $('.results').html('');
+    
     let amount = $('input').val();
     if (amount < 0) {
         alert('Please stay positive 1-50');
